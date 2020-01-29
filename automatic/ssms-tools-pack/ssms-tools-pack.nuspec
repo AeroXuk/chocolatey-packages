@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Do not remove this test for UTF-8: if “Ω” doesn’t appear as greek uppercase omega letter enclosed in quotation marks, you should use an editor that supports UTF-8, not this one. -->
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+  <metadata>
+    <id>ssms-tools-pack</id>
+    <version>4.9.6.0</version>
+    <packageSourceUrl>https://github.com/AeroXuk/chocolatey-packages/tree/master/automatic/ssms-tools-pack</packageSourceUrl>
+    <!-- owners is a poor name for maintainers of the package. It sticks around by this name for compatibility reasons. It basically means you. -->
+    <owners>AeroXuk</owners>
+    <!-- ============================== -->
+
+    <!-- == SOFTWARE SPECIFIC SECTION == -->
+    <!-- This section is about the software itself -->
+    <title>SSMS Tools Pack (Install)</title>
+    <authors>Mladen Prajdić</authors>
+    <projectUrl>https://www.ssmstoolspack.com/</projectUrl>
+    <copyright>2007-2020 Mladen Prajdić</copyright>
+    <licenseUrl>https://www.ssmstoolspack.com/Licensing/EULA</licenseUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <tags>ssms-tools-pack SQL Server SQL-Server Tools SSMSToolsPack SSMS plugin trial</tags>
+    <summary>SSMS Tools Pack is a Microsoft SQL Server Management Studio (SSMS) add-in that dramatically increases your productivity with well-integrated, easy to use features.</summary>
+    <description><![CDATA[
+SSMS Tools Pack is a Microsoft SQL Server Management Studio (SSMS) add-in that dramatically increases your productivity with well-integrated, easy to use features.
+]]></description>
+    <releaseNotes>https://www.ssmstoolspack.com/News</releaseNotes>
+    <!-- =============================== -->
+
+    <!-- Specifying dependencies and version ranges? https://docs.nuget.org/create/versioning#specifying-version-ranges-in-.nuspec-files -->
+    <dependencies>
+      <!--
+      <dependency id="" version="__MINIMUM_VERSION__" />
+      <dependency id="" version="[__EXACT_VERSION__]" />
+      <dependency id="" version="[_MIN_VERSION_INCLUSIVE, MAX_VERSION_INCLUSIVE]" />
+      <dependency id="" version="[_MIN_VERSION_INCLUSIVE, MAX_VERSION_EXCLUSIVE)" />
+      -->
+      <dependency id="sql-server-management-studio" version="14.0.17289.1" />
+      <dependency id="chocolatey-core.extension" version="1.1.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+  </files>
+</package>
