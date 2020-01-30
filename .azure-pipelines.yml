@@ -1,0 +1,76 @@
+# https://aka.ms/yaml
+
+name: $(BuildID)
+
+pool:
+  vmImage: 'windows-latest'
+
+strategy:
+  maxParallel: 1
+
+trigger:
+  - master
+
+schedules:
+  - cron: 5 */12 * * *
+    branches:
+      include:
+        - master
+    displayName: 'Check for updates at 00:05 & 12:05.'
+    always: true
+
+steps:
+- powershell: |
+    git config --global user.email "AeroXuk@users.noreply.github.com"
+    git config --global user.name "AeroXuk"
+    git config --global core.safecrlf false
+  displayName: 'Init'
+
+- powershell: |
+    Get-CimInstance win32_operatingsystem -Property Caption, OSArchitecture, Version | fl Caption, OSArchitecture, Version
+    $PSVersionTable
+    git --version
+    choco --version
+    git clone -q https://github.com/majkinetor/au.git $Env:TEMP/au
+    . "$Env:TEMP/au/scripts/Install-AU.ps1" $Env:au_version
+    "Build info"
+    '  {0,-20} {1}' -f 'SCHEDULED BUILD:', ('$(Build.Reason)' -eq 'Schedule')
+    '  {0,-20} {1}' -f 'FORCED BUILD:'   , ('$(Build.Reason)' -eq 'Manual')
+  displayName: 'Install'
+
+- powershell: |
+    $ErrorActionPreference = 'Continue'
+    if ('$(Build.DefinitionName)' -like '*test*') { ./test_all.ps1 "random $Env:au_test_groups"; return }
+    if ( ('$(Build.Reason)' -ne 'Schedule') -and ('$(Build.Reason)' -ne 'Manual') ) {
+        switch -regex ('$(Build.SourceVersionMessage)')
+        {
+            '\[AU (.+?)\]'   { $forced = $Matches[1] }
+            '\[PUSH (.+?)\]' {
+                $packages = $Matches[1] -split ' '
+                Write-Host "PUSHING PACKAGES: $packages"
+                foreach ($package in $packages) {
+                    Write-Host ("{0}`n{1}`n" -f ('-'*60), "PACKAGE: $package")
+                    $package_dir = ls -recurse | ? { $_.Name -eq "$package.nuspec"} | select -First 1 | % Directory
+                    if (!$package_dir) { Write-Warning "Can't find package '$package'"; continue }
+                    pushd $package_dir; choco pack; Push-Package; popd
+                }
+                return
+            }
+        }
+    }
+    ./update_all.ps1 -ForcedPackages $forced
+    7z a au_temp.zip $Env:TEMP\chocolatey\au\*
+  displayName: 'Build'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)'
+    Contents: |
+      update_info.xml
+      Update-AUPackages.md
+      au_temp.zip
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+  displayName: 'Copy Artifacts'
+
+- publish: '$(Build.ArtifactStagingDirectory)'
+  displayName: 'Publish Artifacts'
