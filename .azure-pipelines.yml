@@ -60,6 +60,13 @@ steps:
     }
     ./update_all.ps1 -ForcedPackages $forced
     7z a au_temp.zip $Env:TEMP\chocolatey\au\*
+  env:
+    api_key: $(api_key)
+    au_Push: $(au_Push)
+    gist_id: $(gist_id)
+    gist_id_test: $(gist_id_test)
+    github_api_key: $(github_api_key)
+    github_user_repo: $(github_user_repo)
   displayName: 'Build'
 
 - task: CopyFiles@2
