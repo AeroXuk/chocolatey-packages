@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>ssms-tools-pack</id>
-    <version>5.7.3.0</version>
+    <version>5.9.1.0</version>
     <packageSourceUrl>https://github.com/AeroXuk/chocolatey-packages/tree/master/automatic/ssms-tools-pack</packageSourceUrl>
     <!-- owners is a poor name for maintainers of the package. It sticks around by this name for compatibility reasons. It basically means you. -->
     <owners>AeroXuk</owners>
