@@ -5,11 +5,11 @@ $packageArgs = @{
   packageName   = $env:ChocolateyPackageName
   unzipLocation = $toolsDir
   fileType      = 'msi'
-  url           = 'https://www.ssmstoolspack.com/Download/STP?v=5.9.2.0'
+  url           = 'https://www.ssmstoolspack.com/Download/STP?v=6.0.1.0'
 
   softwareName  = 'SSMS Tools Pack *'
 
-  checksum      = '4b787f10f939f392cf64ccafa06aa121d7313a16bd9af8e93c7a0f75aab94b5c'
+  checksum      = 'c7cd7226749e862db12c5a37c4a7e4504c3037a6ab0a28ab3029ad74e4dee59d'
   checksumType  = 'sha256'
 
   silentArgs    = "/qn /norestart /l*v `"$($env:TEMP)\$($packageName).$($env:chocolateyPackageVersion).MsiInstall.log`""
