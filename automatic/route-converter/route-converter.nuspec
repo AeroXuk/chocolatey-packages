@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Do not remove this test for UTF-8: if “Ω” doesn’t appear as greek uppercase omega letter enclosed in quotation marks, you should use an editor that supports UTF-8, not this one. -->
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+  <metadata>
+    <id>route-converter</id>
+    <version>2.27.1</version>
+    <packageSourceUrl>https://github.com/AeroXuk/chocolatey-packages/tree/master/automatic/route-converter</packageSourceUrl>
+    <!-- owners is a poor name for maintainers of the package. It sticks around by this name for compatibility reasons. It basically means you. -->
+    <owners>AeroXuk</owners>
+    <!-- ============================== -->
+
+    <!-- == SOFTWARE SPECIFIC SECTION == -->
+    <!-- This section is about the software itself -->
+    <title>Route Converter (Portable)</title>
+    <authors>Christian Pesch</authors>
+    <projectUrl>https://www.routeconverter.com/</projectUrl>
+    <copyright>2007 Christian Pesch</copyright>
+    <licenseUrl>https://raw.githubusercontent.com/cpesch/RouteConverter/master/LICENSE-GPL.txt</licenseUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <tags>route-converter RouteConverter RouteConverterOpenSource</tags>
+    <summary>RouteConverter is a free, user friendly GPS tool to display, edit, enrich and convert routes, tracks and waypoints. It helps me to plan routes and consolidate tracks, and I hope it could help you.</summary>
+    <description><![CDATA[
+RouteConverter is a free, user friendly GPS tool to display, edit, enrich and convert routes, tracks and waypoints. It helps me to plan routes and consolidate tracks, and I hope it could help you.
+]]></description>
+    <releaseNotes>https://www.routeconverter.com/releases</releaseNotes>
+    <!-- =============================== -->
+
+    <!-- Specifying dependencies and version ranges? https://docs.nuget.org/create/versioning#specifying-version-ranges-in-.nuspec-files -->
+    <dependencies>
+      <!--
+      <dependency id="" version="__MINIMUM_VERSION__" />
+      <dependency id="" version="[__EXACT_VERSION__]" />
+      <dependency id="" version="[_MIN_VERSION_INCLUSIVE, MAX_VERSION_INCLUSIVE]" />
+      <dependency id="" version="[_MIN_VERSION_INCLUSIVE, MAX_VERSION_EXCLUSIVE)" />
+      -->
+      <dependency id="jre8" version="8.0.201" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+  </files>
+</package>
